@@ -5,7 +5,6 @@ import { connect} from 'react-redux'
  class HomeScreen extends React.Component {
     state ={
         data:[]
-        
     }
     componentDidMount(){
        
@@ -15,7 +14,6 @@ import { connect} from 'react-redux'
                this.setState({data:res.posts})
             })
     }
-
 
   render() {
     return (
@@ -38,8 +36,9 @@ import { connect} from 'react-redux'
              return (   
                <TouchableOpacity 
                key={index}
+               id={index}
                style={styles.buttonOrder}
-               onPress={(e)=>this.props.removeItem(order)}
+               onPress={(e)=>this.props.removeItem(order, index)}
                >
                    <Text key={index} style={styles.orderText}> Pizza flavour {order.name} - Price:{order.price/2} $ </Text>
                  </TouchableOpacity>
@@ -61,8 +60,8 @@ import { connect} from 'react-redux'
 
 const mapDispatchToProps = (dispatch)=> {
   return{
-    addItemToCart:(product)=>dispatch({type:'ADD_TO_CART', payload:product}),
-    removeItem:(product)=>dispatch({type:'REMOVE_PIZZA', payload:product })
+    addItemToCart:(product)=>dispatch({type:'ADD_PIZZA', payload:product}),
+    removeItem:(order, index)=>dispatch({type:'REMOVE_PIZZA', payload:{ order, index} })
   }
 }
 const mapStateToProps = (state) =>{
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'green',
     alignItems: 'center',
+    
   },
   note:{
     color:'#fff',
