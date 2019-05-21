@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {createStackNavigator } from 'react-navigation'
 import HomeScreen from './containers/HomeScreen';
-import ShoppingCart from './ShoppingCart'
+import ShoppingCart from './containers/ShoppingCart'
 import {Provider} from 'react-redux';
 import store from './store'
 
@@ -13,8 +13,6 @@ import store from './store'
     return (
       <Provider store={store}>
         <AppStackNavigator/>
-
-
       </Provider>
     );
   }

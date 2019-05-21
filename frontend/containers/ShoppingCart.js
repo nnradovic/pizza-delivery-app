@@ -1,25 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {createStackNavigator } from 'react-navigation'
-import HomeScreen from './containers/HomeScreen'
 import {connect} from 'react-redux'
+
  class ShoppingCart extends React.Component {
   render() {
- 
+    let total = 0
     return (
-      
         <View>
-            <Text>Order successfu</Text>
-            <Text>You order half Capricoasa and half Peperoni</Text>
-            <Text>Total Price is 17.5$</Text>
+            <Text>{this.props.cartItems.length == 2? "Order successful" : "Please complete your order"}</Text>
             {this.props.cartItems.length == 2 ?
-          
-
-          <Text>{this.props.cartItems[0].name ==(this.props.cartItems[1].name || null) ? (<Text>{this.props.cartItems[0].name} {this.props.cartItems[0].price}</Text> ) 
+          <Text>{this.props.cartItems[0].name ==(this.props.cartItems[1].name || null) ? (<Text><Text>Order full pizza flavour {this.props.cartItems[0].name} </Text> <Text>  Total {this.props.cartItems[0].price} $</Text></Text> ) 
           : this.props.cartItems.map((cartItem, index)=>{
-               return(<Text key={index}>{cartItem.name}{cartItem.price/2}</Text>) }) }</Text>
-          
+               total += parseFloat(cartItem.price/2)
+               
+
+               return(<Text key={index}>Order half pizza flavour {cartItem.name} at price{cartItem.price/2} $ </Text>) })  }</Text>
             : <Text>You must order one complete Pizza</Text>}
+            <Text>{total == 0 ? '': total}</Text>
         </View>
     );
   }
