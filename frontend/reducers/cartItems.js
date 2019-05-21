@@ -10,6 +10,9 @@ action)=>{
             }
             return  [...state, action.payload]
         case 'REMOVE_PIZZA':
+        
+ 
+    
             return state.filter(cartItem=>cartItem.name !== action.payload.name)
     }
     return state
