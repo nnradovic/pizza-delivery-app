@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
             <Text style={styles.menu} >{this.props.cartItems.length == 2? "Order successful" : "Please complete your order"}</Text>
             {this.props.cartItems.length == 2 ?
           <Text>{this.props.cartItems[0].name ==(this.props.cartItems[1].name || null) ? 
-          (<Text  style={styles.center}>
+          (<Text   >
           <Text style={styles.menu}>Full pizza flavour {this.props.cartItems[0].name}</Text> {"\n"}
           <Text style={styles.total}>Total {this.props.cartItems[0].price} $</Text>
           </Text> ) 
@@ -39,14 +39,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'green',
     alignItems: 'center',
+    width: '100%',textAlign: 'center'
 
   },
-  center:
-  {
-      flex: 1,
-      // justifyContent: 'center', // Used to set Text Component Vertically Center
-      alignItems: 'center' // Used to set Text Component Horizontally Center
-  },
+
   menu:{
     color:'#fff',
     fontSize: 18,
@@ -56,8 +52,7 @@ const styles = StyleSheet.create({
   total:{
     color:'#fff',
     fontSize: 24,
-    flex: 1,
     backgroundColor: 'green',
-    alignItems: 'center',
+   
   }
 });

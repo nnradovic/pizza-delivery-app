@@ -1,17 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image,TouchableOpacity } from 'react-native';
 import { connect} from 'react-redux'
 
  class HomeScreen extends React.Component {
     state ={
-        data:[]
+        data:[],
+        isLoading:true
     }
     componentDidMount(){
        
             fetch('https://pizza-app-nr.herokuapp.com/feed/posts')
             .then(res => res.json())
             .then(res=>{
-               this.setState({data:res.posts})
+               this.setState({
+                 data:res.posts,
+                 isLoading:false
+                })
             })
     }
 
@@ -19,6 +23,7 @@ import { connect} from 'react-redux'
     return (
         
        <View style={styles.container}>
+         {(this.state.isLoading) ? <Image source={require('../assets/pizza.gif')} /> : null}
            <Text style={styles.menu}>Our Pizza Offer</Text>
             {this.state.data.map((post, index)=>{
                 return (   
@@ -51,7 +56,7 @@ import { connect} from 'react-redux'
                       >
                    <Text  style={styles.menuText}>Finish ordering </Text>
                  </TouchableOpacity>
-                <Text style={styles.note}>Note: If you order two different flavour you get half by every flavour, if are same you get full pizza with that flavour.</Text>
+                <Text style={styles.note}>Note: If the flavours are the same, the whole pizza will have that one flavour.</Text>
        </View>
     );
   }
